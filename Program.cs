@@ -1,20 +1,17 @@
-﻿// See https://aka.ms/new-console-template for more information
-
-using (ShopContext db = new ShopContext())
+﻿using (ShopContext db = new ShopContext())
 {
-    /*    for (int i = 1; i < 4; i++)
+    for (int i = 1; i < 4; i++)
+    {
+        Product p = new Product
         {
-            Product product = new Product
-            {
-                Name = "Product " + i,
-                Price = 10.00M * i,
-                Description = "This is a product description"
-            };
-            db.Products.Add(product);
-        }
-        db.SaveChanges();*/
+            Name = "Product " + i,
+            Price = 10.00M * i,
+            Description = "This is a product description"
+        };
+        db.Products.Add(p);
+    }
 
-/*    Costumer costumer = new()
+    Costumer costumer = new()
     {
         Name = "Alessio",
         Surname = "Vitiello",
@@ -32,10 +29,7 @@ using (ShopContext db = new ShopContext())
 
     db.Costumers.Add(costumer);
 
-    db.SaveChanges();*/
-
-    
-    for(int i = 0; i < 5; i++)
+    for (int i = 0; i < 5; i++)
     {
         Random rand = new();
         Order order = new()
@@ -47,7 +41,7 @@ using (ShopContext db = new ShopContext())
         List<OrderProduct> orders = new();
         for (int j = 0; j < rand.Next(1, 4); j++)
         {
-            Product product = db.Products.First(p => p.Id == j+1);
+            Product product = db.Products.First(p => p.Id == j + 1);
             orders.Add(new OrderProduct
             {
                 OrderId = order.Id,
@@ -61,5 +55,15 @@ using (ShopContext db = new ShopContext())
         db.Orders.Add(order);
         db.OrderProducts.AddRange(orders);
     }
+
+    //db.Orders.First(o => o.Id == 1).Status = "Completed";
+    Order? _order = db.Orders.Find(2);
+    if (_order != null)
+    {
+        db.Orders.Remove(_order);
+    }
+
+    Product _product = db.Products.Find(db.OrderProducts.First().ProductId);
+    db.Products.Remove(_product);
     db.SaveChanges();
 }
