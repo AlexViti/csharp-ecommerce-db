@@ -56,7 +56,7 @@
         db.OrderProducts.AddRange(orders);
     }
 
-    //db.Orders.First(o => o.Id == 1).Status = "Completed";
+    db.Orders.First(o => o.Id == 1).Status = "Completed";
     Order? _order = db.Orders.Find(2);
     if (_order != null)
     {
