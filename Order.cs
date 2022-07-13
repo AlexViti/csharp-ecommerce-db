@@ -17,5 +17,5 @@ public class Order
     public int CostumerId { get; set; }
     public Costumer Costumer { get; set; }
 
-    public IList<OrderProduct> OrderProducts { get; } = new List<OrderProduct>();
+    public IList<OrderProduct> OrderProducts { get; set; } = new List<OrderProduct>();
 }
